@@ -63,4 +63,4 @@ Any program that have built a signature based on `function2()` will not be able 
 
 ## Known bugs
 
-C++'s `std::cin` will cause the program to crash after running the polymorphic engine. Use scanf (or one of its variants) instead.
+Programs written in .NET Framework does not work. Any programs written in "managed" code (e.g Java) is unlikely to work too.
