@@ -39,9 +39,8 @@ std::vector<FUNCTION_INFO> getFunctions(HANDLE proc, uintptr_t segmentStartAddr,
                 currFunc = {};
             }
         }else{
-            if (!isFunc && strcmp("jmp", opcode) != 0 && strcmp("nop", opcode) != 0 
-                && segment[offset - 1] == 0xCC && segment[offset - 2] == 0xCC) {
-                // JMP and NOP cannot be first byte of function. Function must have 2 padding above to be considered valid.
+            if (!isFunc && strcmp("jmp", opcode) != 0 && strcmp("nop", opcode) != 0 ) {
+                // JMP and NOP cannot be first byte of function.
                 isFunc = true;
                 funcStart = offset;
                 currFunc.offset = offset;
@@ -69,6 +68,7 @@ void recursivePrune(BYTE* segment, int offset, std::vector<FUNCTION_INFO>* funcL
     ZydisDecodedInstruction instruction;
 
     int index = findFunc(*funcList, offset);
+
     if (index == -1) {
         // Test for landing in jump table
         ZydisDecoderDecodeBuffer(&decoder, segment + offset, 5, &instruction);
